@@ -1,6 +1,11 @@
 import { Request, Response } from 'express';
+import { writeFile } from 'fs/promises';
+import path from 'path';
+import { webSocket } from '../../app';
+
 import axios from 'axios';
 
+const serverInfo = process.env.SERVER_INFO_FILE;
 const GITHUB_OWNER = 'patrick-ddeus';
 const GITHUB_REPO = 'nto-launcher-api';
 const FILE_PATH = 'client_info.json';
@@ -9,12 +14,13 @@ const BRANCH = 'main';
 export default async (req: Request, res: Response) => {
   const githubToken = process.env.GITHUB_TOKEN;
   const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${FILE_PATH}`;
+  const filePath = path.join(process.cwd(), serverInfo);
 
   try {
     const data = req.body;
     if (!data) {
       res.status(400).json({ error: 'Nenhum dado fornecido' });
-      return
+      return;
     }
 
     data.last_update = new Date();
@@ -46,6 +52,9 @@ export default async (req: Request, res: Response) => {
         },
       }
     );
+
+    await writeFile(filePath, JSON.stringify(data, null, 2), 'utf-8');
+    webSocket.notifyClient(1, 'true');
 
     res.status(200).json({ message: 'Arquivo atualizado com sucesso' });
     return;
