@@ -2,7 +2,8 @@ import { Request, Response } from 'express';
 import { writeFile } from 'fs/promises';
 import path from 'path';
 import { webSocket } from '../../app';
-const serverInfo = process.env.serverInfoFile;
+
+const serverInfo = process.env.SERVER_INFO_FILE;
 
 export default async (req: Request, res: Response) => {
   try {
