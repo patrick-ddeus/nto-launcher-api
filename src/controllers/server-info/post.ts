@@ -10,7 +10,8 @@ export default async (req: Request, res: Response) => {
     data.last_update = new Date();
 
     if (!data) {
-      return res.status(400).json({ error: 'Nenhum dado fornecido' });
+      res.status(400).json({ error: 'Nenhum dado fornecido' });
+      return
     }
 
     await writeFile(filePath, JSON.stringify(data, null, 2), 'utf-8');
