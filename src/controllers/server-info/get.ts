@@ -7,7 +7,6 @@ const serverInfo = process.env.serverInfoFile
 export default async (req: Request, res: Response) => {
   try {
     const filePath = path.join(process.cwd(), serverInfo);
-    console.log("🚀 ~ filePath:", filePath)
     const fileContent = await readFile(filePath, 'utf-8');
     const emails = JSON.parse(fileContent);
 
