@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import { readFile, writeFile } from 'fs/promises';
 import path from 'path';
-import { getDirectMediafireLink } from '../../services/server-info/getDirectMediafireLink';
 
 const serverInfo = process.env.SERVER_INFO_FILE;
 
@@ -16,10 +15,7 @@ export default async (req: Request, res: Response) => {
       !json.last_resolved_at || now - json.last_resolved_at > EXPIRES_IN;
 
     if (linkExpirado) {
-      const resolved = await getDirectMediafireLink(
-        json.original_mediafire_link
-      );
-      json.download_link = resolved;
+      json.download_link = json.original_mediafire_link;
       json.last_resolved_at = now;
       await writeFile(filePath, JSON.stringify(json, null, 2));
     }
