@@ -1,9 +1,6 @@
 {
-  "client_version": "5.1",
+  "client_version": "5.0",
   "original_otc_mediafire_link": "https://github.com/patrick-ddeus/nto-launcher-api/releases/download/v5.0/OTC.NTOLOST.rar",
   "original_old_mediafire_link": "https://github.com/patrick-ddeus/nto-launcher-api/releases/download/v5.0/OLD.NTOLOST.rar",
-  "last_update": "2025-05-10T14:46:09.100Z",
-  "otc_download_link": "https://github.com/patrick-ddeus/nto-launcher-api/releases/download/v5.0/OTC.NTOLOST.rar",
-  "old_download_link": "https://github.com/patrick-ddeus/nto-launcher-api/releases/download/v5.0/OLD.NTOLOST.rar",
-  "last_resolved_at": 1746888403602
+  "last_update": "2025-05-10T19:57:53.011Z"
 }
