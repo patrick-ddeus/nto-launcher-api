@@ -15,7 +15,8 @@ export default async (req: Request, res: Response) => {
       !json.last_resolved_at || now - json.last_resolved_at > EXPIRES_IN;
 
     if (linkExpirado) {
-      json.download_link = json.original_mediafire_link;
+      json.otc_download_link = json.original_otc_mediafire_link;
+      json.old_download_link = json.original_old_mediafire_link;
       json.last_resolved_at = now;
       await writeFile(filePath, JSON.stringify(json, null, 2));
     }
